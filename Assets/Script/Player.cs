@@ -12,9 +12,12 @@ public class Player : MonoBehaviour
     private CharacterController _characterController;
     private Vector2 _moveInput;//移動入力
 
+    private InputAction _inputAction;
+
     // Start is called before the first frame update
     void Start()
     {
+        _inputAction = GetComponent<InputAction>();
         _characterController = GetComponent<CharacterController>();
         Application.targetFrameRate = 60;
     }
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (_inputAction.actions["move"].IsPressed())
+
         _moveSpeed = _isSprinting ? _WalkSpeed : _sprintSpeed;//歩きと走りを判別
         _characterController.Move((transform.right * _moveInput.x + transform.forward * _moveInput.y) * _WalkSpeed * Time.deltaTime);//最終的な移動スピード
     }
