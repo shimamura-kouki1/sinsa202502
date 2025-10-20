@@ -9,15 +9,20 @@ public class Player : MonoBehaviour
     private float _moveSpeed;//動く速度
     private bool _isSprinting = false;//歩きと走りの判定
 
+    [Header("Look Settings")]
+    [SerializeField] private float _mouseSensitivity = 2f;//マウス感度
+    [SerializeField] private Transform _cameraTransform; //視点カメラ
+
     private CharacterController _characterController;
     private Vector2 _moveInput;//移動入力
+    private Vector2 _lookInput;//視点入力
+    private float _verticalRotation;//上下の視点　回転の角度
+    private float _yaw;              // 左右視点の角度
 
-    private InputAction _inputAction;
 
     // Start is called before the first frame update
     void Start()
     {
-        _inputAction = GetComponent<InputAction>();
         _characterController = GetComponent<CharacterController>();
         Application.targetFrameRate = 60;
     }
@@ -29,11 +34,19 @@ public class Player : MonoBehaviour
 
         _moveSpeed = _isSprinting ? _WalkSpeed : _sprintSpeed;//歩きと走りを判別
         _characterController.Move((transform.right * _moveInput.x + transform.forward * _moveInput.y) * _WalkSpeed * Time.deltaTime);//最終的な移動スピード
+
+        _yaw += _lookInput.x * _mouseSensitivity;
+        _verticalRotation -= _lookInput.y * _mouseSensitivity;// 上下回転を入力に応じて増減
+        _verticalRotation = Mathf.Clamp(_verticalRotation, -80f, 80f); // 上下視点の角度制限
+
+        transform.rotation = Quaternion.Euler(0f, _yaw, 0f); // プレイヤー本体は左右
+        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f); // カメラは上下
     }
 
     public void Onmove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+        Debug.Log("aaa");
     }
     public void OnActoin(InputAction.CallbackContext context)
     {
