@@ -12,6 +12,12 @@ public class Player1 : MonoBehaviour
     private Vector2 _vertical;
     private Vector3 _playerPostion;
 
+    [Header("FPS Camera Setings")]
+    [SerializeField] private float _mouseSensitivity = 2f ;
+    [SerializeField] private Transform _cameraTransform;
+
+    private float _yaw; //左右視点のこと　Y軸＝Yaw
+
     private Transform _tr;
     private Rigidbody _rb;
 
@@ -32,7 +38,7 @@ public class Player1 : MonoBehaviour
 
     private void FixedUpdate()
     {
-       
+       //======== 移動 =========
         if (_playerInput.actions["Move"].IsPressed())
         {
             Debug.Log("aa");
@@ -40,5 +46,7 @@ public class Player1 : MonoBehaviour
             _playerPostion = new Vector3 (_horizontal.x, 0, _horizontal.y);
             _rb.MovePosition(transform.position + _playerPostion * _moveSpeed * Time.fixedDeltaTime);
         }
+        //======== FPS視点カメラ =========
+
     }
 }
