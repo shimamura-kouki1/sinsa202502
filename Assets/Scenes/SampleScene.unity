@@ -860,6 +860,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
+  _mouseSensitivity: 2
+  _cameraTransform: {fileID: 330585546}
 --- !u!54 &1533743793
 Rigidbody:
   m_ObjectHideFlags: 0
