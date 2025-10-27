@@ -18,7 +18,7 @@ public class look : MonoBehaviour
     {
         _playerInput = GetComponent<PlayerInput>();
         _tr = GetComponent<Transform>();
-        _look = _playerInput.actions["look"];
+
     }
 
     // Update is called once per frame
