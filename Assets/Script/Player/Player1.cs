@@ -12,14 +12,6 @@ public class Player1 : MonoBehaviour
     private Vector2 _vertical;
     private Vector3 _playerPostion;
 
-    [Header("FPS Camera Setings")]
-    [SerializeField] private float _mouseSensitivity = 2f ;
-    [SerializeField] private Transform _cameraTransform;
-
-    private float _yaw; //左右視点のこと　Y軸＝Yaw
-    private Vector2 _lookInput;
-    private float _verticalRotation;
-
     private Transform _tr;
     private Rigidbody _rb;
 
@@ -48,12 +40,5 @@ public class Player1 : MonoBehaviour
             _playerPostion = new Vector3 (_horizontal.x, 0, _horizontal.y);
             _rb.MovePosition(_tr.position + _playerPostion * _moveSpeed * Time.fixedDeltaTime);
         }
-        //======== FPS視点カメラ =========
-        _yaw += _lookInput.x * _mouseSensitivity;
-        _verticalRotation -= _lookInput.y * _mouseSensitivity;
-        _verticalRotation = Mathf.Clamp(_verticalRotation, -80f, 80f);
-
-        _tr.rotation = Quaternion.Euler(0f, _yaw, 0f); // プレイヤー本体は左右
-        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f); // カメラは上下
     }
 }
