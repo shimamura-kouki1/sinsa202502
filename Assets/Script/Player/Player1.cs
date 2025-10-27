@@ -51,9 +51,8 @@ public class Player1 : MonoBehaviour
         //======== ˆÚ“® =========
         if (_playerInput.actions["Move"].IsPressed())
         {
-            Debug.Log("aa");
             _horizontal = _move.ReadValue<Vector2>();
-            _playerPostion = new Vector3(_horizontal.x, 0, _horizontal.y);
+            _playerPostion = new Vector3(_horizontal.x, 0, _horizontal.y).normalized;
             _rb.MovePosition(_tr.position + _playerPostion * _moveSpeed * Time.fixedDeltaTime);
         }
     }
