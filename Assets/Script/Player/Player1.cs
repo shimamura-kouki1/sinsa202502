@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -45,6 +46,11 @@ public class Player1 : MonoBehaviour
 
         _tr.rotation = Quaternion.Euler(0f, _yaw, 0f); // プレイヤー本体は左右
         _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f); // カメラは上下
+
+        if (_playerInput.actions["Fire"].IsInProgress())
+        {
+            
+        }
     }
 
     private void FixedUpdate()
@@ -57,9 +63,6 @@ public class Player1 : MonoBehaviour
             _rb.MovePosition(_tr.position + _playerPostion * _moveSpeed * Time.fixedDeltaTime);
             //トランスフォームトランスレートのほうがいい？
         }
-        if(_playerInput.actions["Fire"].IsInProgress())
-        {
-            
-        }
+       
     }
 }
