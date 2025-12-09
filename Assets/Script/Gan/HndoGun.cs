@@ -1,10 +1,16 @@
 using UnityEngine;
 
-public class HndoGun : IShotBehavior
+public class HndoGun : IGun
 {
-    public void Shoot(Transform muzzle)
-    {
+    private GunDate gunDate;
 
+    public HndoGun(GunDate gunDate)
+    {
+        this.gunDate = gunDate;
+    }
+
+    public void Shoot()
+    {
         throw new System.NotImplementedException();
     }
 }
