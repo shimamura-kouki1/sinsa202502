@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IGun
 {
-    void Shoot();
+    void Shoot(Transform ShootPoint);
 }

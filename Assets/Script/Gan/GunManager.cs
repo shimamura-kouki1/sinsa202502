@@ -5,6 +5,7 @@ public class GunManager : MonoBehaviour
     public IGun UsingGun { get; private set; }
 
     [SerializeField] private GunData _handGunData;
+    [SerializeField] private Transform _shootPoint;
 
     private void Start()
     {
@@ -12,6 +13,6 @@ public class GunManager : MonoBehaviour
     }
     public void PlayerShoot()
     {
-        UsingGun?.Shoot();
+        UsingGun?.Shoot(_shootPoint);
     }
 }
