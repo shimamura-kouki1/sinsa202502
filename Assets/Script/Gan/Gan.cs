@@ -7,6 +7,8 @@ public class Gan : MonoBehaviour
     //[SerializeField] private GameObject _stratPos;
     [SerializeField]private float _shotSpeed;
     [SerializeField] private float _shotTime;
+    [SerializeField] private GunManager _gunManager;
+
 
     [Header("Gan Setting")]
     [SerializeField]private float _renge = 100f;
@@ -24,12 +26,6 @@ public class Gan : MonoBehaviour
     }
     public void Shot()
     {
-        Ray ray = new Ray(_playerCamera.transform.position, _playerCamera.transform.forward);
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * _renge, Color.red, 1f);
-        if(Physics.Raycast(ray,out hit, _renge))
-        {
-
-        }
+      
     }
 }
