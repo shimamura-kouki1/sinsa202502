@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gan : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private GunManager _gunManager;
@@ -9,11 +9,6 @@ public class Gan : MonoBehaviour
     [Header("Gan Setting")]
     [SerializeField]private float _renge = 100f;
 
-
-    void Start()
-    {
-        
-    }
     public void Fire()
     {
         _gunManager.PlayerShoot(_shootPoint);

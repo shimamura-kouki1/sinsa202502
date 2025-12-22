@@ -16,7 +16,7 @@ public class Player1 : MonoBehaviour
     [SerializeField] private float _mouseSensitivity = 2f;
     [SerializeField] private Transform _cameraTransform;
 
-    [SerializeField] private Gan _gun;//銃仲介
+    [SerializeField] private Gun _gun;//銃仲介
 
     private InputAction _look;
     private float _yaw; //左右視点のこと　Y軸＝Yaw
@@ -65,6 +65,19 @@ public class Player1 : MonoBehaviour
             _rb.MovePosition(_tr.position + _playerPostion * _moveSpeed * Time.fixedDeltaTime);
             //トランスフォームトランスレートのほうがいい？
         }
-       
+
+        // === 視点回転 === 
+
+        _yaw += _lookInput.x * _mouseSensitivity;
+        _verticalRotation -= _lookInput.y * _mouseSensitivity;// 上下回転を入力に応じて増減
+        _verticalRotation = Mathf.Clamp(_verticalRotation, -80f, 80f); // 上下視点の角度制限
+
+        transform.rotation = Quaternion.Euler(0f, _yaw, 0f); // プレイヤー本体は左右
+        _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f); // カメラは上下
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
     }
 }
