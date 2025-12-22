@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class Gan : MonoBehaviour
 {
-    [SerializeField] private Transform _shotPos;
-    [SerializeField] private Camera _playerCamera;
-    //[SerializeField] private GameObject _stratPos;
-    [SerializeField]private float _shotSpeed;
-    [SerializeField] private float _shotTime;
+    [SerializeField] private Transform _shootPoint;
     [SerializeField] private GunManager _gunManager;
 
 
@@ -18,14 +14,8 @@ public class Gan : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Fire()
     {
-        Shot();
-    }
-    public void Shot()
-    {
-      
+        _gunManager.PlayerShoot(_shootPoint);
     }
 }

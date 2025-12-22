@@ -16,6 +16,8 @@ public class Player1 : MonoBehaviour
     [SerializeField] private float _mouseSensitivity = 2f;
     [SerializeField] private Transform _cameraTransform;
 
+    [SerializeField] private Gan _gun;//銃仲介
+
     private InputAction _look;
     private float _yaw; //左右視点のこと　Y軸＝Yaw
     private Vector2 _lookInput;
@@ -47,9 +49,9 @@ public class Player1 : MonoBehaviour
         _tr.rotation = Quaternion.Euler(0f, _yaw, 0f); // プレイヤー本体は左右
         _cameraTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f); // カメラは上下
 
-        if (_playerInput.actions["Fire"].IsInProgress())
+        if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
-            
+            _gun.Fire();
         }
     }
 

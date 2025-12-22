@@ -11,7 +11,7 @@ public class GunManager : MonoBehaviour
     {
         UsingGun = new HandGun(_handGunData);
     }
-    public void PlayerShoot()
+    public void PlayerShoot(Transform shootPoint)
     {
         UsingGun?.Shoot(_shootPoint);
     }
