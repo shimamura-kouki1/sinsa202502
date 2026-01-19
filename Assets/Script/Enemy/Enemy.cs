@@ -2,8 +2,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _hp = 100;
+    [SerializeField] private EnemyDate _enemyDate;
 
+    private float _hp;
+    private float _attackValue;
+
+    private void Start()
+    {
+        _hp = _enemyDate._maxHp;
+        _attackValue = _enemyDate._attackValue;
+    }
     public void TakeDamage(float damage)
     {
         _hp -= damage;
@@ -15,6 +23,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     private void Die()
     {
+        transform.position =  _enemyDate._despoilAnchor.position;
         Debug.Log("Dei");
     }
 }
