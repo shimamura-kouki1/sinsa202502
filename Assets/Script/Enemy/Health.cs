@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private EnemyDate _enemyDate;
 
     private float _hp;
-    private float _attackValue;
 
     private void Start()
     {
         _hp = _enemyDate._maxHp;
-        _attackValue = _enemyDate._attackValue;
     }
     public void TakeDamage(float damage)
     {
