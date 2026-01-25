@@ -6,4 +6,6 @@ public class EnemyDate : ScriptableObject
     public Transform _despoilAnchor;
     public float _maxHp = 100;
     public float _attackValue;
+    public float _moveSpeed;
+    public float _attacRenge;
 }

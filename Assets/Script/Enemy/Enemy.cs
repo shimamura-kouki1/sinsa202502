@@ -1,27 +1,28 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyDate _enemyDate;
+    private Health _health;
 
-    private float _hp;
-
-    private void Start()
+    private void Awake()
     {
-        _hp = _enemyDate._maxHp;
+        _health = GetComponent<Health>();
     }
-    public void TakeDamage(float damage)
+    private void OnEnable()
     {
-        _hp -= damage;
-        Debug.Log(_hp);
-        if (_hp <= 0f)
-        {
-            Die();
-        }
+        _health.OnDeath += Die;
     }
+    private void OnDisable()
+    {
+        _health.OnDeath -= Die;
+    }
+ 
     private void Die()
     {
         transform.position =  _enemyDate._despoilAnchor.position;
         Debug.Log("Dei");
+
+        //今後死亡してから、リスポーンのサイクル処理を作る
     }
 }
