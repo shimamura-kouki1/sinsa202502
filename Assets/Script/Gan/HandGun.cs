@@ -11,6 +11,7 @@ public class HandGun : IGun
 
     public void Shoot(Transform shootPoint)
     {
+      
         //レイキャスト・ダメージ計算・適応、射程
         Debug.Log($"発射");
         Vector3 directoin = (shootPoint.forward + Random.insideUnitSphere * _gunData.Diffusion).normalized;

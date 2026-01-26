@@ -7,7 +7,7 @@ public class Health : MonoBehaviour,IDamageable
 {
     [SerializeField] private float _maxHp = 100f;
 
-    private float _currentHp;
+    private float _currentHp;//現在のHP
 
     public event Action OnDeath;//死んだ通知
     public event Action<float> OnDamaged;//ダメージ量の通知　UI用

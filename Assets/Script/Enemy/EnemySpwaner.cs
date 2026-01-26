@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpwaner : MonoBehaviour
@@ -8,6 +9,16 @@ public class EnemySpwaner : MonoBehaviour
 
     [SerializeField] Transform _player;
 
+    private GameObject[] _enemyList;
+
+    private void Start()
+    {
+        for (int i = 0; i < _SpwanCount; i++)
+        {
+            var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     /// <summary>
     /// エネミーを生成＋死亡通知に登録
     /// </summary>
@@ -15,15 +26,13 @@ public class EnemySpwaner : MonoBehaviour
     {
         _arriveEnemyCount = _SpwanCount;
 
-        for(int i = 0;i<_SpwanCount; i++)
+        for (int i = 0; i < _SpwanCount; i++)
         {
             var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
             enemy.GetComponent<EnemyAi>().TargetSet(_player);
             enemy.GetComponent<Health>().OnDeath += OnEnemyDeath;
             //後々エネミーを生成ではなく場所移動で使いまわしたい
         }
-
-        
     }
     /// <summary>
     ///　Wave終了後の処理
@@ -36,6 +45,5 @@ public class EnemySpwaner : MonoBehaviour
         {
             Debug.Log("GameClear");
         }
-
     }
 }

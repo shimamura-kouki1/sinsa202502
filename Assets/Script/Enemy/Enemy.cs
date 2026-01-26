@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyDate _enemyDate;
     private Health _health;
+    [SerializeField]private UIManager _uiManager;
 
     private void Awake()
     {

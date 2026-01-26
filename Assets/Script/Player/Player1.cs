@@ -26,6 +26,7 @@ public class Player1 : MonoBehaviour
     private Transform _tr;
     private Rigidbody _rb;
 
+    [SerializeField] private GameObject _effect;//銃のマズルフラッシュ,エフェクトの奴後々場所を帰る
 
     void Start()
     {
@@ -52,6 +53,8 @@ public class Player1 : MonoBehaviour
         if (_playerInput.actions["Fire"].WasPressedThisFrame())
         {
             _gun.Fire();
+            _effect.SetActive(false);//これらの場所も変える
+            _effect.SetActive(true);
         }
     }
 
