@@ -2,6 +2,9 @@ using System.Data.Common;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+/// <summary>
+/// Enemy‚ÌˆÚ“®‚ÆUŒ‚
+/// </summary>
 public class EnemyAi : MonoBehaviour
 {
     [SerializeField] private EnemyDate _enemyDate;
