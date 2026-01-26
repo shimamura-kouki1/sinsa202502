@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   _despoilAnchor: {fileID: 4605116576871203143, guid: 4fda48c777564af408b8f88ca7033797, type: 3}
-  _maxHp: 15
-  _attackValue: 0
+  _maxHp: 10
+  _attackValue: 5
+  _moveSpeed: 2
+  _attacRenge: 1

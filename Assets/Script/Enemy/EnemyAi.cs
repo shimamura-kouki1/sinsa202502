@@ -47,7 +47,7 @@ public class EnemyAi : MonoBehaviour
     /// </summary>
     private void MoveToTarget()
     {
-        Vector3 direction = (transform.position - _playerPos.position).normalized;
+        Vector3 direction = (_playerPos.position - transform.position).normalized;
         transform.position += direction * _moveSpeed * Time.deltaTime;
     }
     /// <summary>

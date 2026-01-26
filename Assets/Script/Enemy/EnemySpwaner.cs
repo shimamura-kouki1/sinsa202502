@@ -20,6 +20,7 @@ public class EnemySpwaner : MonoBehaviour
             var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
             enemy.GetComponent<EnemyAi>().TargetSet(_player);
             enemy.GetComponent<Health>().OnDeath += OnEnemyDeath;
+            //後々エネミーを生成ではなく場所移動で使いまわしたい
         }
 
         
