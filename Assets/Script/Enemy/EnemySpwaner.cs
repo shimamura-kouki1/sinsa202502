@@ -13,10 +13,7 @@ public class EnemySpwaner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _SpwanCount; i++)
-        {
-            var enemy = Instantiate(_enemyPrefab, transform.position, Quaternion.identity);
-        }
+
     }
 
     /// <summary>
