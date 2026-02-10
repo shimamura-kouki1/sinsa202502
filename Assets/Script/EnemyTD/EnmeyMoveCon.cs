@@ -6,25 +6,27 @@ using UnityEngine;
 public class EnemyMoveCon : MonoBehaviour
 {
     [SerializeField] private float _movespeed = 2f;
-
     private WaypointNode _currentNode;
-
+    private Health _health;
     private Transform _tr;
 
 
     private void OnEnable()
     {
         EnemyManager.Instance.Register(this);
+        _health.OnDeath += Die;
     }
     private void Awake()
     {
         _tr = transform;
-    }
+        _health = GetComponent<Health>();
+}
 
     private void OnDisable()
     {
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.Unregister(this);
+        _health.OnDeath -= Die;
     }
 
     /// <summary>
@@ -76,5 +78,14 @@ public class EnemyMoveCon : MonoBehaviour
             // ¨ ƒS[ƒ‹”»’è‚ÍTrigger‚É”C‚¹‚é
             enabled = false;
         }
+    }
+
+    /// <summary>
+    /// €–S‚µ‚½‚Æ‚«‚Ìˆ—
+    /// </summary>
+    private void Die()
+    {
+        Debug.Log("Enemy Dead");
+        gameObject.SetActive(false); // MVP
     }
 }

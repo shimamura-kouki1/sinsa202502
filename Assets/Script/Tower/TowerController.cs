@@ -36,4 +36,12 @@ public class TowerController : MonoBehaviour
         }
         return null;
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _range);
+    }
+#endif
 }
