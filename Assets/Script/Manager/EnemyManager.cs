@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
+/// <summary>
+/// ¶‘¶‚µ‚Ä‚¢‚éEnemyŠÇ—
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager instance { get; private set; }
+    public static EnemyManager Instance { get; private set; }
 
     private readonly List<EnemyMoveCon> _enemies = new();
 
-    public IReadOnlyList<EnemyMoveCon> Enemys => _enemies;
+    public IReadOnlyList<EnemyMoveCon> Enemies => _enemies;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     public void Register(EnemyMoveCon enemy)

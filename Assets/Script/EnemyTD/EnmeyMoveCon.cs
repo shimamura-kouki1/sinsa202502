@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Enemyの移動制御
+/// </summary>
 public class EnemyMoveCon : MonoBehaviour
 {
     [SerializeField] private float _movespeed = 2f;
@@ -8,11 +11,22 @@ public class EnemyMoveCon : MonoBehaviour
 
     private Transform _tr;
 
+
+    private void OnEnable()
+    {
+        EnemyManager.Instance.Register(this);
+    }
     private void Awake()
     {
         _tr = transform;
     }
-    
+
+    private void OnDisable()
+    {
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.Unregister(this);
+    }
+
     /// <summary>
     /// スポーン時に最初のノードを設定
     /// </summary>
