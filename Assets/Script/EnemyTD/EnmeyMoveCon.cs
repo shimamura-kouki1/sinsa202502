@@ -13,10 +13,10 @@ public class EnemyMoveCon : MonoBehaviour
     private Transform _tr;
 
 
-    private void OnEnable()
+    private void Start()
     {
         EnemyManager.Instance.Register(this);
-        _health.OnDeath += Die;
+        _health.OnDeath += Die;//å„ÅXÅAìoò^Ç∑ÇÈÇÃÇÕspawnerë§Ç©ÇÁÇ…ÇµÇΩÇ¢
     }
     private void Awake()
     {

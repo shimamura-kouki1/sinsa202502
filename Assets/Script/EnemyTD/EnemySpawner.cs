@@ -8,16 +8,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private WaypointNode _startNode;
 
-    private void Start()
-    {
-        Spawn();
-    }
-
-    public void Spawn()
+    public EnemyMoveCon Spawn()
     {
         EnemyMoveCon enemy =
-            Instantiate(_enmeyPrefab);
+            Instantiate(_enmeyPrefab,transform.position,Quaternion.identity);
 
         enemy.Initialize(_startNode);
+
+        return enemy;
     }
 }
