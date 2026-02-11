@@ -6,8 +6,10 @@ using UnityEngine;
 public class EnemyMoveCon : MonoBehaviour
 {
     [SerializeField] private float _movespeed = 2f;
+
     private WaypointNode _currentNode;
     private Health _health;
+
     private Transform _tr;
 
 
