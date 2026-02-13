@@ -9,9 +9,12 @@ public class EnemyMoveCon : MonoBehaviour
 
     private WaypointNode _currentNode;
     private Health _health;
-
+    private IDamageable _damageable;
+    
     private Transform _tr;
 
+    public int CurrentNodeIndex {  get; private set; }
+    public IDamageable Damageable => _damageable;
 
     private void Start()
     {
@@ -22,7 +25,8 @@ public class EnemyMoveCon : MonoBehaviour
     {
         _tr = transform;
         _health = GetComponent<Health>();
-}
+        _damageable = GetComponent<IDamageable>();
+    }
 
     private void OnDisable()
     {
@@ -73,6 +77,7 @@ public class EnemyMoveCon : MonoBehaviour
         if (_currentNode.NextNodes())
         {
             _currentNode = _currentNode.GetNextNode();
+            CurrentNodeIndex++;
         }
         else
         {

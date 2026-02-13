@@ -24,17 +24,25 @@ public class TowerController : MonoBehaviour
 
     private IDamageable FindTarget()
     {
-        Debug.Log($"Enemies Count: {EnemyManager.Instance.Enemies.Count}");
+        int bestProgress = -1;//アンカーと数を合わせるためのー1
+        EnemyMoveCon bestEnemy = null;
+
         foreach (var enemy in EnemyManager.Instance.Enemies)
         {
             float sqr =
-                (enemy.transform.position - transform.position).sqrMagnitude;
+                  (enemy.transform.position - transform.position).sqrMagnitude;//敵との距離計算
 
-            if (sqr > _range * _range) continue;
-            Debug.Log("Target Found!");
-            return enemy.GetComponent<IDamageable>();
+            if (sqr > _range * _range) continue;//射程外ならスキップ
+
+            if (enemy.CurrentNodeIndex > bestProgress)//ゴールに近い敵を選ぶ
+            {
+                bestProgress = enemy.CurrentNodeIndex;
+                bestEnemy = enemy;
+            }
         }
-        return null;
+        if (bestEnemy == null) return null;
+
+        return bestEnemy.Damageable;
     }
 
 #if UNITY_EDITOR
