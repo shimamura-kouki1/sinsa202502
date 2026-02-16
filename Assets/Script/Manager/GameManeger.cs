@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public class GameManeger : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    private EnemySpwaner _enemySpawner;
-    void Start()
+    [SerializeField] private BaseHealth _baseHealth;
+    public void RegisterEnemy(EnemyMoveCon enemy)
     {
-        _enemySpawner = GetComponent<EnemySpwaner>();
-        _enemySpawner.StartWave();
+        enemy.OnReachedGoal += HandleEnemyReachedGoal;
+    }
+
+    private void HandleEnemyReachedGoal(EnemyMoveCon enemy)
+    {
+        enemy.OnReachedGoal -= HandleEnemyReachedGoal;
+        _baseHealth.TakeDamage(1);
     }
 }

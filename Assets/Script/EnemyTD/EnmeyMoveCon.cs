@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,10 +13,14 @@ public class EnemyMoveCon : MonoBehaviour
     private IDamageable _damageable;
     
     private Transform _tr;
-
+    public event Action<EnemyMoveCon> OnReachedGoal;
+    public event Action<EnemyMoveCon> OnDied;
     public int CurrentNodeIndex {  get; private set; }
     public IDamageable Damageable => _damageable;
-
+    private void OnEnable()
+    {
+        Debug.Log("Enabled: " + gameObject.GetInstanceID());
+    }
     private void Start()
     {
         EnemyManager.Instance.Register(this);
@@ -30,6 +35,7 @@ public class EnemyMoveCon : MonoBehaviour
 
     private void OnDisable()
     {
+        Debug.Log("Disabled: " + gameObject.GetInstanceID());
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.Unregister(this);
         _health.OnDeath -= Die;
@@ -63,7 +69,7 @@ public class EnemyMoveCon : MonoBehaviour
         //tragetÇ‹Ç≈_movespeed * Time.deltaTimeÇ©ÇØÇƒà⁄ìÆ
         _tr.position = Vector3.MoveTowards(_tr.position, traget, _movespeed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position,traget) < 0.05f)
+        if(Vector3.Distance(transform.position,traget) < 0.2f)
         {
             MoveToNextNode();
         }
@@ -74,6 +80,7 @@ public class EnemyMoveCon : MonoBehaviour
     /// </summary>
     private void MoveToNextNode()
     {
+
         if (_currentNode.NextNodes())
         {
             _currentNode = _currentNode.GetNextNode();
@@ -81,9 +88,7 @@ public class EnemyMoveCon : MonoBehaviour
         }
         else
         {
-            // éüÇ™ñ≥Ç¢ = ÉSÅ[Éã
-            // Å® ÉSÅ[ÉãîªíËÇÕTriggerÇ…îCÇπÇÈ
-            enabled = false;
+            ReachGoal();
         }
     }
 
@@ -92,7 +97,12 @@ public class EnemyMoveCon : MonoBehaviour
     /// </summary>
     private void Die()
     {
-        Debug.Log("Enemy Dead");
+        OnDied?.Invoke(this);
         gameObject.SetActive(false); // MVP
+    }
+    private void ReachGoal()
+    {
+        OnReachedGoal?.Invoke(this);
+        gameObject.SetActive(false);
     }
 }

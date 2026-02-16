@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+//必ず、空のobjectにアタッチすること
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private EnemySpawner _spawner;
@@ -12,6 +13,7 @@ public class WaveManager : MonoBehaviour
     private bool _isSpawning;
     private bool _cleared;
 
+ 
     void Start()
     {
         StartCoroutine(SpawnWave());        
@@ -19,15 +21,17 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
+        Debug.Log("Wave Start");
         _isSpawning = true;
 
         while(_spawned < _spawnCount)
         {
+            Debug.Log("Spawn Count: " + _spawned);
             _spawner.Spawn();
             _spawned++;
             yield return new WaitForSeconds(_interval);
         }
-
+        Debug.Log("Wave End");
         _isSpawning = false;
     }
 
@@ -40,5 +44,5 @@ public class WaveManager : MonoBehaviour
             Debug.Log("クリア");
         }
     }
-
 }
+
