@@ -4,7 +4,7 @@ using UnityEngine;
 //必ず、空のobjectにアタッチすること
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private EnemySpawnerEscortGame _spawner;
 
     [SerializeField] private int _spawnCount = 5;
     [SerializeField] private float _interval = 1f;
@@ -27,7 +27,7 @@ public class WaveManager : MonoBehaviour
         while(_spawned < _spawnCount)
         {
             Debug.Log("Spawn Count: " + _spawned);
-            _spawner.Spawn();
+            //_spawner.Spawn();
             _spawned++;
             yield return new WaitForSeconds(_interval);
         }

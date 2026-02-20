@@ -24,10 +24,12 @@ public class Health : MonoBehaviour,IDamageable
 
         _currentHp -= damage;
         _currentHp = Mathf.Max(_currentHp, 0f);//
+        Debug.Log(_currentHp);
 
-        OnHealthDamaged?.Invoke(_currentHp,0f);//ダメージの通知
+        OnHealthDamaged?.Invoke(_currentHp, 0f);//ダメージの通知
+        
 
-        if(_currentHp <= 0f)
+        if (_currentHp <= 0f)
         {
             OnDeath?.Invoke();//HPが0になったら通知
         }

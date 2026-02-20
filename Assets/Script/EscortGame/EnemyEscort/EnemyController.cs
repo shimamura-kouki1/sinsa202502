@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     private float _moveSpeed;
     private float _damage;
 
-    private EnemyData _data;
+    private EnemyDataEscortGame _data;
     private Transform _target;
     private Transform _tr;
     private EnemyHelth _enemyHelth;
@@ -16,14 +16,14 @@ public class EnemyController : MonoBehaviour
     /// ターゲットを設定
     /// </summary>
     /// <param name="target"></param>
-    public void Initialize(EnemyData data, Transform target)
+    public void Initialize(EnemyDataEscortGame data, Transform target,ObjectPool pool)
     {
         _data = data;
         _target = target;
         _moveSpeed = data.moveSpeed;
         _damage = data.damage;
         _enemyHelth = GetComponent<EnemyHelth>();
-        _enemyHelth.Initialize(data.maxHP);
+        _enemyHelth.Initialize(data.maxHP,_data,pool);
     }
 
     private void Awake()

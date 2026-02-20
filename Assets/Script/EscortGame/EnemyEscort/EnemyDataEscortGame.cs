@@ -1,6 +1,6 @@
 using UnityEngine;
-[CreateAssetMenu(menuName = "Enemy/EnemyData")]
-public class EnemyData : ScriptableObject
+[CreateAssetMenu(menuName = "Enemy/EnemyDataEscortGame")]
+public class EnemyDataEscortGame : ScriptableObject
 {
     public GameObject prefab;
 
