@@ -6,12 +6,12 @@ public class UIManager : MonoBehaviour
     public void SetHealth(Health health)
     {
         _health = health;
-        _health.OnDamaged += OnDamaged;
+        _health.OnHealthDamaged += OnDamaged;
         _health.OnDeath += OnDeath;
     }
     private void OnDestroy()
     {
-        _health.OnDamaged -= OnDamaged;
+        _health.OnHealthDamaged -= OnDamaged;
         _health.OnDeath -= OnDeath;
     }
 
@@ -20,9 +20,9 @@ public class UIManager : MonoBehaviour
         Debug.Log("Enemy Dead");
     }
 
-    public void OnDamaged(float damage)
+    public void OnDamaged(float CurrentHP,float maxHP)
     {
-        Debug.Log(damage);
+        Debug.Log(CurrentHP);
     }
 
 }

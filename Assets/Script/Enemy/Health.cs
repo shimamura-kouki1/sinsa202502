@@ -10,11 +10,12 @@ public class Health : MonoBehaviour,IDamageable
     private float _currentHp;//現在のHP
 
     public event Action OnDeath;//死んだ通知
-    public event Action<float> OnDamaged;//ダメージ量の通知　UI用
+    public event Action<float,float> OnHealthDamaged;//ダメージ量の通知　UI用
 
     private void Awake()
     {
         _currentHp = _maxHp;
+        OnHealthDamaged?.Invoke(_currentHp, _maxHp);
     }
 
     public void TakeDamage(float damage)
@@ -24,12 +25,11 @@ public class Health : MonoBehaviour,IDamageable
         _currentHp -= damage;
         _currentHp = Mathf.Max(_currentHp, 0f);//
 
-        OnDamaged?.Invoke(damage);//ダメージの通知
+        OnHealthDamaged?.Invoke(_currentHp,0f);//ダメージの通知
 
         if(_currentHp <= 0f)
         {
             OnDeath?.Invoke();//HPが0になったら通知
         }
-
     }
 }
