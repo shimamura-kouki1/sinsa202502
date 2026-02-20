@@ -10,6 +10,7 @@ public class EnemySpawnerEscortGame : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private ObjectPool _pool;
+    [SerializeField] private GameManager _gameManager;
 
     [Header("スポーン距離")]
     [SerializeField] private float _minSpawnDistance = 8f;   // 最小距離
@@ -48,9 +49,15 @@ public class EnemySpawnerEscortGame : MonoBehaviour
         //プールから取得
         GameObject obj = _pool.Spawn(data.prefab,spawnPos, Quaternion.identity);
 
+        EnemyController enemy =
+        obj.GetComponent<EnemyController>();
+
+        enemy.Initialize(data, _target, _pool);
         //初期化
-        obj.GetComponent<EnemyController>()
-           .Initialize(data, _target, _pool);
+        //obj.GetComponent<EnemyController>()
+        //   .Initialize(data, _target, _pool);
+
+        _gameManager.RegisterEnemy(enemy);
     }
 
     private Vector3 RandomSpawnPositon()

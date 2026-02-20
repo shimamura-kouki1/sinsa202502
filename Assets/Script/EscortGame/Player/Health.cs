@@ -26,7 +26,7 @@ public class Health : MonoBehaviour,IDamageable
         _currentHp = Mathf.Max(_currentHp, 0f);//
         Debug.Log(_currentHp);
 
-        OnHealthDamaged?.Invoke(_currentHp, 0f);//ダメージの通知
+        OnHealthDamaged?.Invoke(_currentHp,_maxHp);//ダメージの通知
         
 
         if (_currentHp <= 0f)

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,10 @@ public class EnemyController : MonoBehaviour
     private Transform _target;
     private Transform _tr;
     private EnemyHelth _enemyHelth;
+
+    public event Action<EnemyController> OnDied;
+    public event Action<EnemyController> OnReachedGoal;
+
     /// <summary>
     /// ターゲットを設定
     /// </summary>
@@ -24,6 +29,12 @@ public class EnemyController : MonoBehaviour
         _damage = data.damage;
         _enemyHelth = GetComponent<EnemyHelth>();
         _enemyHelth.Initialize(data.maxHP,_data,pool);
+
+        _enemyHelth = GetComponent<EnemyHelth>();
+        _enemyHelth.Initialize(data.maxHP, _data, pool);
+
+        _enemyHelth.OnDeathEnemy -= HandleDeath;
+        _enemyHelth.OnDeathEnemy += HandleDeath;
     }
 
     private void Awake()
@@ -61,5 +72,9 @@ public class EnemyController : MonoBehaviour
             }
             _enemyHelth.TakeDamage(9999f);
         }
+    }
+    private void HandleDeath()
+    {
+        OnDied?.Invoke(this);
     }
 }

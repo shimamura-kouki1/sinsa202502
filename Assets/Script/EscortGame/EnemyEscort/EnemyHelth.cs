@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyHelth : MonoBehaviour,IDamageable
@@ -5,6 +6,7 @@ public class EnemyHelth : MonoBehaviour,IDamageable
     private float _currentHp;
     private EnemyDataEscortGame _data;
     private ObjectPool _pool;
+    public event Action OnDeathEnemy;//死んだ通知
 
     public void Initialize(float maxHp,EnemyDataEscortGame data,ObjectPool pool)
     {

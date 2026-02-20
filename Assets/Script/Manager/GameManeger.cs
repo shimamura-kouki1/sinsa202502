@@ -16,25 +16,36 @@ public class GameManager : MonoBehaviour
         _escort.OnReachedGoal -= HandleGameClear;
         _escort.OnEscortDead -= HandleGameOver;
     }
+    public void RegisterEnemy(EnemyController enemy)
+    {
+        //二重に登録されるのを防ぐため
+        enemy.OnReachedGoal -= HandleEnemyReachedGoal;
+        enemy.OnDied -= HandleEnemyDied;
 
+        enemy.OnReachedGoal += HandleEnemyReachedGoal;
+        enemy.OnDied += HandleEnemyDied;
+    }
     private void HandleGameClear()
     {
         Debug.Log("GAME CLEAR");
-        Time.timeScale = 0f;
     }
 
     private void HandleGameOver()
     {
         Debug.Log("GAME OVER");
-        Time.timeScale = 0f;
     }
 
-    public void RegisterEnemy(EnemyMoveCon enemy)
+    
+    private void HandleEnemyDied(EnemyController enemy)
     {
-        enemy.OnReachedGoal += HandleEnemyReachedGoal;
+        CleanupEnemy(enemy);
     }
-
-    private void HandleEnemyReachedGoal(EnemyMoveCon enemy)
+    private void CleanupEnemy(EnemyController enemy)
+    {
+        enemy.OnReachedGoal -= HandleEnemyReachedGoal;
+        enemy.OnDied -= HandleEnemyDied;
+    }
+    private void HandleEnemyReachedGoal(EnemyController enemy)
     {
         enemy.OnReachedGoal -= HandleEnemyReachedGoal;
         _baseHealth.TakeDamage(1);
