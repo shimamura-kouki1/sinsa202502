@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1218615394651886530, guid: 51e7f1b35fcd69c4c81387e649bf839c, type: 3}
   maxHP: 10
-  moveSpeed: 10
+  moveSpeed: 0
   damage: 5

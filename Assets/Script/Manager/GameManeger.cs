@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     [SerializeField] private BaseHealth _baseHealth;
     [SerializeField] private EscortMover _escort;
 
+    [SerializeField] private GameObject _clearPanel;
+    [SerializeField] private GameObject _gameOverPanel;
+
+    private bool _isGameEnd;//護衛対象の死亡とゴールが同時になることを防ぐ
+
+    private void Awake()
+    {
+        Instance = this;
+        Time.timeScale = 1f;
+    }
     private void OnEnable()
     {
         _escort.OnReachedGoal += HandleGameClear;
@@ -27,11 +39,21 @@ public class GameManager : MonoBehaviour
     }
     private void HandleGameClear()
     {
+        if (_isGameEnd) return;
+
+        _isGameEnd = true;
+        _clearPanel.SetActive(true);
+        Time.timeScale = 0f;
         Debug.Log("GAME CLEAR");
     }
 
     private void HandleGameOver()
     {
+        if (_isGameEnd) return;
+
+        _isGameEnd = true;
+        _gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
         Debug.Log("GAME OVER");
     }
 

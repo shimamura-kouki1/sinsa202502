@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
         enemy.Initialize(_startNode);
 
-        _gameManager.RegisterEnemy(enemy);
+        //_gameManager.RegisterEnemy(enemy);
 
         return enemy;
     }
