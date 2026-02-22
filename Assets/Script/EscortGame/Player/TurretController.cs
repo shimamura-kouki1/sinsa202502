@@ -11,6 +11,7 @@ public class TurretController : MonoBehaviour
     /// </summary>
     public void Fire(Vector3 origin, Vector3 direction)
     {
+        if (!_weapon) return;
         _weapon.Fire(origin,direction);
     }
 }
