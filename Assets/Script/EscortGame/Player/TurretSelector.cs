@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +7,8 @@ using UnityEngine;
 public class TurretSelector : MonoBehaviour
 {
     [SerializeField] private TurretController[] _turrets;
-    [SerializeField] private Transform _cameraTransform;
+    [SerializeField] private Transform _playerTransform;
+    public event Action<Transform> OnTurretChanged;
 
     private int _currentIndex;
 
@@ -17,7 +19,11 @@ public class TurretSelector : MonoBehaviour
         if (index < 0 || index >= _turrets.Length) return;
 
         _currentIndex = index;
-        _cameraTransform.position = _turrets[index].transform.position;
-        _cameraTransform.rotation = _turrets[index].transform.rotation;
+
+        Transform pivot = _turrets[index].transform;
+        _playerTransform.position = pivot.position;
+        _playerTransform.rotation = pivot.rotation;
+
+        OnTurretChanged?.Invoke(pivot);
     }
 }

@@ -18,7 +18,7 @@ public class Player1 : MonoBehaviour
 
     [SerializeField] private Gun _gun;//銃仲介
 
-    private InputAction _look;
+    private InputAction _lookAction;
     private float _yaw; //左右視点のこと　Y軸＝Yaw
     private Vector2 _lookInput;
     private float _verticalRotation;
@@ -28,20 +28,27 @@ public class Player1 : MonoBehaviour
 
     [SerializeField] private GameObject _effect;//銃のマズルフラッシュ,エフェクトの奴後々場所を帰る
 
+    private const string _fire = "Fire";
+    private const string _llok = "Look";
+    private const string _1 = "1";
+    private const string _2 = "2";
+    private const string _3 = "3";
+    private const string _4 = "4";
+
     void Start()
     {
         _playerInput = GetComponent<PlayerInput>();
         _rb = GetComponent<Rigidbody>();
         _tr = GetComponent<Transform>();
         _move = _playerInput.actions["Move"];
-        _look = _playerInput.actions["look"];
+        _lookAction = _playerInput.actions["look"];
     }
 
     // Update is called once per frame
     void Update()
     {
         //======== カメラコントロール =========
-        _lookInput = _look.ReadValue<Vector2>();
+        _lookInput = _lookAction.ReadValue<Vector2>();
 
         _yaw += _lookInput.x * _mouseSensitivity;
         _verticalRotation -= _lookInput.y * _mouseSensitivity;

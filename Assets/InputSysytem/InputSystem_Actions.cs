@@ -183,9 +183,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""switch"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""e4085bf9-d610-4e40-9745-2afd0c271a09"",
-                    ""expectedControlType"": ""Integer"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
             {
+                Debug.Log("hit");
                 damageable.TakeDamage(_damage);
             }
             if (_hitEffect != null)
