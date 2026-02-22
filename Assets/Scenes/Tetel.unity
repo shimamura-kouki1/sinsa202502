@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelectButton: {fileID: 2070308195}
-  _mainGame: SampleScene
+  _mainGame: EscortGameScene
 --- !u!1 &1464585502
 GameObject:
   m_ObjectHideFlags: 0

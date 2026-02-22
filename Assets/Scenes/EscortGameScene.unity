@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 306888557}
+  _attackInterval: 0.5
 --- !u!114 &306888557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 0}
+  _attackInterval: 5
 --- !u!1 &833750063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 1531839069}
+  _attackInterval: 0.5
 --- !u!114 &1531839069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,6 +2002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 1608016770}
+  _attackInterval: 0.5
 --- !u!114 &1608016770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2063,6 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weapon: {fileID: 1797155262}
+  _attackInterval: 0.5
 --- !u!114 &1797155262
 MonoBehaviour:
   m_ObjectHideFlags: 0
