@@ -27,6 +27,7 @@ public class EnemyHelth : MonoBehaviour,IDamageable
 
     private void Die()
     {
+        OnDeathEnemy?.Invoke();
         _pool.Despawn(gameObject, _data.prefab);
     }
 }

@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Net;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -13,6 +13,14 @@ public class Weapon : MonoBehaviour
     [Header("Tracer設定")]
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private float _tracerDuration = 0.05f; // 表示時間
+    [SerializeField] private Transform _tracerStratPos;
+
+    [Header("SE")]
+    [SerializeField] private AudioClip _fireSE;
+
+    public event Action OnFire;
+    public event Action<RaycastHit> OnHit;
+
     /// <summary>
     /// レイを飛ばす
     /// </summary>
@@ -37,8 +45,19 @@ public class Weapon : MonoBehaviour
             }
 
         }
+        // 銃口から当たり位置への方向を計算
+        Vector3 tracerDir = (endPoint - _tracerStratPos.position).normalized;
+
+        // 銃口から当たり位置までの距離を計算
+        float tracerDistance = Vector3.Distance(_tracerStratPos.position, endPoint);
+
+        // 銃口から正しい方向・距離で終点を再計算
+        Vector3 tracerEnd = _tracerStratPos.position + tracerDir * tracerDistance;
+
         // トレーサー表示
-        StartCoroutine(ShowTracer(origin, endPoint));
+        StartCoroutine(ShowTracer(_tracerStratPos.position,tracerEnd));
+
+        FireSE();
     }
 
     /// <summary>
@@ -54,5 +73,10 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(_tracerDuration);
 
         _lineRenderer.enabled = false;
+    }
+
+    private void FireSE()
+    {
+        AudioManager.Instance.PlaySE(_fireSE);
     }
 }

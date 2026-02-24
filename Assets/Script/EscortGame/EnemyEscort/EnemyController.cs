@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : MonoBehaviour
 {
+
     private float _moveSpeed;
     private float _damage;
 
@@ -27,11 +28,9 @@ public class EnemyController : MonoBehaviour
         _target = target;
         _moveSpeed = data.moveSpeed;
         _damage = data.damage;
-        _enemyHelth = GetComponent<EnemyHelth>();
-        _enemyHelth.Initialize(data.maxHP,_data,pool);
 
         _enemyHelth = GetComponent<EnemyHelth>();
-        _enemyHelth.Initialize(data.maxHP, _data, pool);
+        _enemyHelth.Initialize(data.maxHP,_data,pool);
 
         _enemyHelth.OnDeathEnemy -= HandleDeath;
         _enemyHelth.OnDeathEnemy += HandleDeath;
@@ -75,6 +74,22 @@ public class EnemyController : MonoBehaviour
     }
     private void HandleDeath()
     {
+        if (_data.deathEffectPrefab != null)
+        {
+            Instantiate(_data.deathEffectPrefab, transform.position, Quaternion.identity);
+        }
+
+        DeathSE();
+
         OnDied?.Invoke(this);
     }
+
+    private void DeathSE()
+    {
+        if (_data.deathSE != null)
+        {
+            AudioManager.Instance.PlaySE(_data.deathSE);
+        }
+    }
+
 }

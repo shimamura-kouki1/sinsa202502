@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Enemy1
   m_EditorClassIdentifier: 
   prefab: {fileID: 1218615394651886530, guid: 51e7f1b35fcd69c4c81387e649bf839c, type: 3}
+  deathEffectPrefab: {fileID: 5420564839073591733, guid: eebcb4d5ae6f9614d84740ecc97a7094, type: 3}
+  deathSE: {fileID: 8300000, guid: c30b1f454cb8d404fb8e05c796c6bd7a, type: 3}
   maxHP: 10
   moveSpeed: 0
   damage: 5
