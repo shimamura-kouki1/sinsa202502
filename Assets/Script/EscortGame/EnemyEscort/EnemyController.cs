@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     public event Action<EnemyController> OnDied;
     public event Action<EnemyController> OnReachedGoal;
+    public event Action<int> OnDiedWithScore;//スコア通知用
 
     /// <summary>
     /// ターゲットを設定
@@ -78,6 +79,7 @@ public class EnemyController : MonoBehaviour
         {
             Instantiate(_data.deathEffectPrefab, transform.position, Quaternion.identity);
         }
+        OnDiedWithScore?.Invoke(_data.score);
 
         DeathSE();
 

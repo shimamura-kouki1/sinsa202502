@@ -25,6 +25,7 @@ public class EnemySpawnerEscortGame : MonoBehaviour
     void Start()
     {
         _spawnCoroutine = StartCoroutine(SpawnRoutine());
+        Debug.DrawRay(_target.position, _target.forward * 5f, Color.blue, 2f);
     }
 
     private IEnumerator SpawnRoutine()
@@ -62,22 +63,12 @@ public class EnemySpawnerEscortGame : MonoBehaviour
 
     private Vector3 RandomSpawnPositon()
     {
-        //後方方向のベクトル
-        Vector3 backDir = -_target.forward;
+        float angle = Random.Range(-_spawnAngle, _spawnAngle);
 
-        //基準の角度
-        float baseAngle = Mathf.Atan2(backDir.x, backDir.z) * Mathf.Deg2Rad;
+        // 前方向を基準に回転
+        Vector3 dir = Quaternion.Euler(0f, angle, 0f) * _target.forward;
 
-        //扇形の角度をラジアンに
-        float halfAngleRad = _spawnAngle * Mathf.Deg2Rad;
-
-        //ランダムの角度
-        float randomAngle = baseAngle + Random.Range(-halfAngleRad,halfAngleRad);
-
-        //ランダム距離
         float distance = Random.Range(_minSpawnDistance, _maxSpawnDistance);
-
-        Vector3 dir = new Vector3(Mathf.Sin(randomAngle), 0f, Mathf.Cos(randomAngle));
 
         return _target.position + dir * distance;
     }

@@ -6,7 +6,11 @@ public class EnemyDataEscortGame : ScriptableObject
     public GameObject deathEffectPrefab;
     public AudioClip deathSE;
 
+    [Header("Status")]
     public float maxHP;
     public float moveSpeed;
     public float damage;
+
+    [Header("Score")]
+    public int score;
 }

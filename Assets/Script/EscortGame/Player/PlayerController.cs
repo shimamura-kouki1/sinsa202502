@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float _currentOffsetY;  // 正面からのズレ
     private float _xRotation = 0f;
 
-
+    [SerializeField] private int _startTurretIndex;
     private const string _fire = "Fire";
     private const string _switch = "Switch";
     private const string _1 = "1";
@@ -43,6 +43,16 @@ public class PlayerController : MonoBehaviour
         _fireAction.performed -= OnFire;
         _turretSwitch.performed -= OnSwitch;
         _turretSelector.OnTurretChanged -= SetBaseRotation;
+    }
+
+    private void Start()
+    {
+        _turretSelector.Select(_startTurretIndex);
+
+        Cursor.visible = false;//マウス非表示
+
+        Cursor.lockState = CursorLockMode.Locked;//カーソルを中央に固定
+        
     }
 
     private void Update()
@@ -100,3 +110,10 @@ public class PlayerController : MonoBehaviour
             _turretSelector.Select(3);
     }
 }
+
+//完了・最初のカメラがよくわからないところから始まるから、サウスタレットに設定する
+//タイトル画面の作成
+//完了・半永久的に護衛対象が動くようにする（遠くにゴールを設置した）
+//敵が近くなったらUI画赤色に光るようにしたい
+//BGMを探す
+//進んだ距離＋倒した敵の数でスコアが加算するようにする（このスコアがゲームオーバー・ゲームクリア画面で表示されるようにする）

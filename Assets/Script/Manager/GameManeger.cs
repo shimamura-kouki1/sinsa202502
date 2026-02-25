@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,9 +7,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private BaseHealth _baseHealth;
     [SerializeField] private EscortMover _escort;
+    [SerializeField] private ScoreManager _scoreManager;
 
     [SerializeField] private GameObject _clearPanel;
-    [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private GameObject _gameOverPanel; 
+    [SerializeField] private TextMeshProUGUI _clearScoreText;
+    [SerializeField] private TextMeshProUGUI _gameOverScoreText;
+
 
     private bool _isGameEnd;//護衛対象の死亡とゴールが同時になることを防ぐ
 
@@ -33,9 +38,11 @@ public class GameManager : MonoBehaviour
         //二重に登録されるのを防ぐため
         enemy.OnReachedGoal -= HandleEnemyReachedGoal;
         enemy.OnDied -= HandleEnemyDied;
+        enemy.OnDiedWithScore -= HandleEnemyScore;
 
         enemy.OnReachedGoal += HandleEnemyReachedGoal;
         enemy.OnDied += HandleEnemyDied;
+        enemy.OnDiedWithScore += HandleEnemyScore;
     }
     private void HandleGameClear()
     {
@@ -44,6 +51,7 @@ public class GameManager : MonoBehaviour
         _isGameEnd = true;
         _clearPanel.SetActive(true);
         Time.timeScale = 0f;
+        ShowScore();
         Debug.Log("GAME CLEAR");
     }
 
@@ -54,6 +62,7 @@ public class GameManager : MonoBehaviour
         _isGameEnd = true;
         _gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
+        ShowScore();
         Debug.Log("GAME OVER");
     }
 
@@ -62,14 +71,29 @@ public class GameManager : MonoBehaviour
     {
         CleanupEnemy(enemy);
     }
+
     private void CleanupEnemy(EnemyController enemy)
     {
         enemy.OnReachedGoal -= HandleEnemyReachedGoal;
         enemy.OnDied -= HandleEnemyDied;
+        enemy.OnDiedWithScore -= HandleEnemyScore;
     }
+
     private void HandleEnemyReachedGoal(EnemyController enemy)
     {
         enemy.OnReachedGoal -= HandleEnemyReachedGoal;
         _baseHealth.TakeDamage(1);
+    }
+
+    private void HandleEnemyScore(int score)
+    {
+        _scoreManager.AddEnemyScore(score);
+    }
+    private void ShowScore()
+    {
+        int totalScore = _scoreManager.GetTotalScore();
+
+        _clearScoreText.text = "SCORE : " + totalScore;
+        _gameOverScoreText.text = "SCORE : " + totalScore;
     }
 }
