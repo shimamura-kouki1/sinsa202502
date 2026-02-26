@@ -1,5 +1,8 @@
 using UnityEngine;
-
+/// <summary>
+/// 発射用のSE再生クラス　
+/// 現在使用していない
+/// </summary>
 public class WweaponSE : MonoBehaviour
 {
     private Weapon _weapon;
@@ -15,11 +18,13 @@ public class WweaponSE : MonoBehaviour
     }
     private void OnEnable()
     {
+        //イベント登録
         _weapon.OnFire += FireSE;
     }
 
     private void OnDisable()
     {
+        //イベント登録解除
         _weapon.OnFire -= FireSE;
     }
 
@@ -30,6 +35,7 @@ public class WweaponSE : MonoBehaviour
     {
         if (_fireSE != null)
         {
+            //再生
             _audioSource.PlayOneShot(_fireSE);
         }
     }

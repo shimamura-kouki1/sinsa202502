@@ -77,6 +77,7 @@ public class Weapon : MonoBehaviour
 
     private void FireSE()
     {
+        //今後WeaponSEに責任を移行予定
         AudioManager.Instance.PlaySE(_fireSE);
     }
 }

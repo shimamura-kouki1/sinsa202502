@@ -15,6 +15,10 @@ public class TitelUI : MonoBehaviour
         // コントローラーの選択先を設定する
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstSelectButton);
+
+        Cursor.visible = true;
+
+        Cursor.lockState = CursorLockMode.None;
     }
     public void OnStartButton()
     {
