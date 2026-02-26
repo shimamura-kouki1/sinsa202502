@@ -19,7 +19,7 @@ public class ObjectPool : MonoBehaviour
         // そのPrefab用のキューが存在するかチェック
         if (_pool.TryGetValue(prefab, out var queue) && queue.Count > 0)
         {
-            // キューから取り出す（再利用）
+            // キューから取り出す
             GameObject obj = queue.Dequeue();
 
             // 位置と回転を更新
@@ -33,6 +33,7 @@ public class ObjectPool : MonoBehaviour
         // 無ければ新しく生成
         return Instantiate(prefab, position, rotation);
     }
+
     /// <summary>
     /// objectとプールに戻す
     /// </summary>
@@ -47,6 +48,7 @@ public class ObjectPool : MonoBehaviour
         {
             _pool[prefab] = new Queue<GameObject>(); 
         }
+        //キューに戻す
         _pool[prefab].Enqueue(obj);
     }
 
