@@ -501,7 +501,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342933951
 MonoBehaviour:
@@ -523,10 +523,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Titel
+  m_text: "\u30BF\u30EC\u30C3\u30C8\u9632\u885B\u6226"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c5e0080397bba4c47b3c75a1f4816e33, type: 2}
+  m_sharedMaterial: {fileID: 5653624778751789197, guid: c5e0080397bba4c47b3c75a1f4816e33, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -686,7 +686,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1350378507}
-        m_TargetAssemblyTypeName: HowToPanelController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TitePanelController, Assembly-CSharp
         m_MethodName: HidePanel
         m_Mode: 1
         m_Arguments:
@@ -1306,7 +1306,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1350378507}
-        m_TargetAssemblyTypeName: HowToPanelController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TitePanelController, Assembly-CSharp
         m_MethodName: ShowPanel
         m_Mode: 1
         m_Arguments:
@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1350378503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb8e3c3913b7be409daa02cf921d6a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b3357f20bb7c474588df1a58b70d2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _panel: {fileID: 1336561796}

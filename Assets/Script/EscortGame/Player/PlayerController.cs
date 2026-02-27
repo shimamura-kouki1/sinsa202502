@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float _currentOffsetY;  // 正面からのズレ
     private float _xRotation = 0f;
 
-    [SerializeField] private int _startTurretIndex;
+    [SerializeField] private int _startTurretIndex;//最初の砲台
     private const string _fire = "Fire";
     private const string _switch = "Switch";
     private const string _1 = "1";
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _turretSelector.Select(_startTurretIndex);
+        _turretSelector.Select(_startTurretIndex);//初期砲台を設定
 
         Cursor.visible = false;//マウス非表示
 
@@ -60,8 +60,12 @@ public class PlayerController : MonoBehaviour
         HandleLook();
     }
 
+    /// <summary>
+    /// マウス入力で視点移動
+    /// </summary>
     private void HandleLook()
     {
+        //マウスの移動量の取得
         Vector2 mouseDelta = Mouse.current.delta.ReadValue() * _mouseSensitivity * Time.deltaTime;
 
         //上下
@@ -74,46 +78,67 @@ public class PlayerController : MonoBehaviour
 
         float finalY = _baseYRotation + _currentOffsetY;
 
+        //プレイヤー本体の左右回転
         transform.rotation = Quaternion.Euler(0f, finalY, 0f);
+
+        //カメラの上下回転
         _camera.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         //カメラのX,Y両方制限したらガクガクし始めた
     }
 
+    /// <summary>
+    /// 砲台変更時の角度を修正
+    /// </summary>
+    /// <param name="turret"></param>
     public void SetBaseRotation(Transform turret)
     {
+        //砲台の向いてる方向を基準に
         _baseYRotation = turret.eulerAngles.y;
 
         _currentOffsetY = 0f;
 
+        //プレイヤーの向きを更新
         transform.rotation = Quaternion.Euler(0f, _baseYRotation, 0f);
     }
+
+    /// <summary>
+    /// 発射時に呼ばれる
+    /// </summary>
+    /// <param name="ctx"></param>
     public void OnFire(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Fire");
         Vector3 origin = _camera.transform.position;
         Vector3 direction = _camera.transform.forward;
 
         _turretSelector.CurrentTurret.Fire(origin, direction);
     }
 
+    /// <summary>
+    /// 砲台の切り替え
+    /// </summary>
+    /// <param name="ctx"></param>
     public void OnSwitch(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
         var control = ctx.control;
-        if (control.name == _1)
-            _turretSelector.Select(0);
-        else if (control.name == _2)
-            _turretSelector.Select(1);
-        else if (control.name == _3)
-            _turretSelector.Select(2);
-        else if (control.name == _4)
-            _turretSelector.Select(3);
+
+        //入力されたキーに応じて砲台選択
+        switch(control.name)
+        {
+            case _1:
+                _turretSelector.Select(0);
+                break;
+            case _2:
+                _turretSelector.Select(1);
+                break;
+            case _3:
+                _turretSelector.Select(2);
+                break;
+            case _4:
+                _turretSelector.Select(3);
+                break;
+            default:
+                break;
+        }
     }
 }
-
-//完了・最初のカメラがよくわからないところから始まるから、サウスタレットに設定する
-//タイトル画面の作成
-//完了・半永久的に護衛対象が動くようにする（遠くにゴールを設置した）
-//敵が近くなったらUI画赤色に光るようにしたい
-//BGMを探す
-//進んだ距離＋倒した敵の数でスコアが加算するようにする（このスコアがゲームオーバー・ゲームクリア画面で表示されるようにする）

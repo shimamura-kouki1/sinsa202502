@@ -6,24 +6,32 @@ using UnityEngine;
 public class EscortMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 2f;
-    [SerializeField] private WaypointNode _startNode;
+    [SerializeField] private WaypointNode _startNode;//移動開始の最初のウェイポイント
 
-    private WaypointNode _currentNode;
+    private WaypointNode _currentNode;//今向かってるウェイポイント
     private Transform _tr;
     private Health _health;
 
+    /// <summary>
+    /// ゴール到達時に呼ばれるイベント
+    /// GameManagerが購読
+    /// </summary>
     public event Action OnReachedGoal;
+    /// <summary>
+    /// 死亡時に呼ばれるイベント
+    /// GameManagerが購読
+    /// </summary>
     public event Action OnEscortDead;
 
-    /// <summary>
-    /// 最終ノード到達時に通知するイベント
-    /// </summary>
     private void Awake()
     {
         _tr = transform;
+
+        //開始ノードを現在のノードに
         _currentNode = _startNode;
         _health = GetComponent<Health>();
     }
+
     private void OnEnable()
     {
         _health.OnDeath += HandleDeath;
@@ -48,7 +56,7 @@ public class EscortMover : MonoBehaviour
     {
         Vector3 targetPos = _currentNode.transform.position;
 
-        // ノード方向を計算
+        // ノード方向の単位ベクトルを計算
         Vector3 direction = (targetPos - _tr.position).normalized;
 
         // 移動
@@ -68,7 +76,7 @@ public class EscortMover : MonoBehaviour
             }
             else
             {
-                _currentNode = nextNode;
+                _currentNode = nextNode;//次のノードに移動
             }
         }
     }

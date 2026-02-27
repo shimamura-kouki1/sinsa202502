@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        // そのPrefab用のキューが存在するかチェック
+        // そのPrefab用のキューが存在するかチェックし取得する
         if (_pool.TryGetValue(prefab, out var queue) && queue.Count > 0)
         {
             // キューから取り出す

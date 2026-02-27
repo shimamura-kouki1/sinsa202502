@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// タイトル画面UI
+/// </summary>
 public class TitelUI : MonoBehaviour
 {
     //ボタン設定
@@ -16,9 +19,9 @@ public class TitelUI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstSelectButton);
 
-        Cursor.visible = true;
+        Cursor.visible = true;//マウス表示
 
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;//カーソルの画面固定解除
     }
     public void OnStartButton()
     {

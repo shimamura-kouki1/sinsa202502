@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HowToPanelController : MonoBehaviour
+public class TitePanelController : MonoBehaviour
 {
     [SerializeField] private GameObject _panel; // 操作説明パネル
 

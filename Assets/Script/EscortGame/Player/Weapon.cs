@@ -18,11 +18,20 @@ public class Weapon : MonoBehaviour
     [Header("SE")]
     [SerializeField] private AudioClip _fireSE;
 
+    /// <summary>
+    /// 発射時に呼ばれる
+    /// WweaponSEで購読
+    /// </summary>
     public event Action OnFire;
+
+    /// <summary>
+    /// ヒット時に呼ばれる
+    /// 現在使用してない
+    /// </summary>
     public event Action<RaycastHit> OnHit;
 
     /// <summary>
-    /// レイを飛ばす
+    /// 射撃処理
     /// </summary>
     /// <param name="origin"></param>
     /// <param name="direction"></param>
@@ -36,9 +45,10 @@ public class Weapon : MonoBehaviour
         {
             if (hit.collider.TryGetComponent<IDamageable>(out var damageable))
             {
-                Debug.Log("hit");
+                //ダメージ
                 damageable.TakeDamage(_damage);
             }
+            //ヒットエフェクト生成
             if (_hitEffect != null)
             {
                 Instantiate(_hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
@@ -75,6 +85,9 @@ public class Weapon : MonoBehaviour
         _lineRenderer.enabled = false;
     }
 
+    /// <summary>
+    /// 発射SEの生成
+    /// </summary>
     private void FireSE()
     {
         //今後WeaponSEに責任を移行予定

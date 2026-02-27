@@ -1,8 +1,11 @@
 using UnityEngine;
-
+/// <summary>
+/// UI管理　現在使用していない
+/// </summary>
 public class UIManager : MonoBehaviour
 {
      private Health _health;
+
     public void SetHealth(Health health)
     {
         _health = health;

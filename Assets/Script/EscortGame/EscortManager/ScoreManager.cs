@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// ゲームスコア管理
+/// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private Transform _escortTarget;
+    [SerializeField] private Transform _escortTarget;//護衛対象
 
     [Header("Score Settings")]
     [SerializeField] private float _distanceMultiplier = 1f;//距離の倍率
@@ -12,8 +15,13 @@ public class ScoreManager : MonoBehaviour
     private float _distanceScore;//距離スコア
     private int _enemyScore;//撃破スコア
 
-    private int _lastNotifiedScore;
-    public event Action<int> OnTotalScoreChanged;//スコア更新時のイベント
+    private int _lastNotifiedScore;//最後に通知したスコア
+
+    /// <summary>
+    /// スコア更新時のイベント
+    /// GameManagerが購読
+    /// </summary>
+    public event Action<int> OnTotalScoreChanged;
 
     void Start()
     {
@@ -35,8 +43,6 @@ public class ScoreManager : MonoBehaviour
         float distance = _escortTarget.position.z - _startPosition.z;
         _distanceScore = Mathf.Max(0, distance) * _distanceMultiplier; // マイナス防止
 
-        int total = GetTotalScore();
-
         NotifyScoreChanged(); 
     }
 
@@ -47,6 +53,7 @@ public class ScoreManager : MonoBehaviour
     public void AddEnemyScore(int score)
     {
         _enemyScore += score;
+        NotifyScoreChanged(); // 加算時もスコア通知
     }
 
     /// <summary>
@@ -55,7 +62,7 @@ public class ScoreManager : MonoBehaviour
     /// <returns></returns>
     public int GetTotalScore()
     {
-        return Mathf.RoundToInt(_distanceScore) + _enemyScore;
+        return Mathf.RoundToInt(_distanceScore) + _enemyScore;//四捨五入した値を返す
     }
 
     /// <summary>
@@ -76,6 +83,9 @@ public class ScoreManager : MonoBehaviour
         return Mathf.RoundToInt(_distanceScore);
     }
 
+    /// <summary>
+    /// スコア更新時の通知
+    /// </summary>
     private void NotifyScoreChanged()
     {
         int currentTotal = GetTotalScore();

@@ -4,7 +4,7 @@ using UnityEngine;
 /// </summary>
 public class TurretController : MonoBehaviour
 {
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Weapon _weapon;//砲台が使用する武器
 
     [Header("攻撃設定")]
     [SerializeField] private float _attackInterval = 0.5f; //発射間隔
@@ -25,7 +25,10 @@ public class TurretController : MonoBehaviour
     /// </summary>
     public bool CanFire()
     {
+        //０以下ならture
         return _coolTimer <= 0f;
+
+        //UIで使えるかも、発射可能表示とかで
     }
 
     /// <summary>
@@ -33,12 +36,15 @@ public class TurretController : MonoBehaviour
     /// </summary>
     public void Fire(Vector3 origin, Vector3 direction)
     {
+
         if (!CanFire()) return;
         if (!_weapon) return;
 
+        //クールタイムリセット
         _coolTimer = _attackInterval;
+
+        //武器に実行刺せる
         _weapon.Fire(origin,direction);
 
     }
-   
 }
